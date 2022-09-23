@@ -15,9 +15,6 @@ use App\Http\Controllers\Admin\AttributeValueController;
 | Here is where you can register ADMIN routes for your application.
 */
 
-Route::view('/admin', 'admin.dashboard.index');
-Route::view('/admin/login', 'admin.auth.login');
-
 Route::group(['prefix'  =>  'admin'], function () {
 
     Route::get('login', [LoginController::class, 'showLoginForm'])->name('admin.login');
@@ -26,7 +23,7 @@ Route::group(['prefix'  =>  'admin'], function () {
 
     Route::group(['middleware' => ['auth:admin']], function () {
 
-        Route::get('/', function () {
+        Route::get('/dash', function () {
             return view('admin.dashboard.index');
         })->name('admin.dashboard');
         Route::get('/settings', [SettingController::class, 'index'])->name('admin.settings');
@@ -48,13 +45,14 @@ Route::group(['prefix'  =>  'admin'], function () {
         Route::get('/', [AttributeController::class, 'index'])->name('admin.attributes.index');
         Route::get('/create', [AttributeController::class, 'create'])->name('admin.attributes.create');
         Route::post('/store', [AttributeController::class, 'store'])->name('admin.attributes.store');
-        Route::get('/{id}/edit', [AttributeController::class, 'edit'])->name('admin.attributes.edit');
+        Route::get('/{attribute_id}/edit', [AttributeController::class, 'edit'])->name('admin.attributes.edit');
         Route::post('/update', [AttributeController::class, 'update'])->name('admin.attributes.update');
         Route::get('/{id}/delete', [AttributeController::class, 'delete'])->name('admin.attributes.delete');
 
-        Route::post('/get-values', [AttributeValueController::class, 'getValues']);
+        Route::get('/get-values', [AttributeValueController::class, 'index'])->name('admin.attributes.value.index');
         Route::post('/add-values', [AttributeValueController::class, 'addValues'])->name('admin.attributes.value.store');
-        Route::post('/update-values', [AttributeValueController::class, 'updateValues']);
-        Route::post('/delete-values', [AttributeValueController::class, 'deleteValues'])->name('admin.attributes.value.delete');
+        // Route::get('/{id}/edit', [AttributeValueController::class, 'edit'])->name('admin.attributes.value.edit');
+        Route::post('/update-values', [AttributeValueController::class, 'updateValues'])->name('admin.attributes.value.update');
+        Route::get('/{id}/delete-values', [AttributeValueController::class, 'deleteValues'])->name('admin.attributes.value.delete');
     });
 });

@@ -53,8 +53,13 @@ class AttributeController extends BaseController
         $attribute = $this->attributeRepository->findAttributeById($id);
         $this->setPageTitle('Attributes', 'Edit Attribute : ' . $attribute->name);
         $data = AttributeValue::where('attribute_id', $id)->get();
+        $valueId = null;
 
-        return view('admin.attributes.edit', compact('attribute', 'data'));
+        if(!empty(request()->query())){
+            $valueId = AttributeValue::where('id', request()->query()['id'])->first();
+        }
+
+        return view('admin.attributes.edit', compact('attribute', 'data', 'valueId'));
     }
 
     public function update(Request $request)

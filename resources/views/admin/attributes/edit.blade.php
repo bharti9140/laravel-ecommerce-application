@@ -18,7 +18,7 @@
     </div>
     <div class="col-md-9">
         <div class="tab-content">
-            <div class="tab-pane active" id="general">
+            <div class="tab-pane <?= isset($_GET['id']) ? '' : 'active' ?>" id="general">
                 <div class="tile">
                     <form action="{{ route('admin.attributes.update') }}" method="POST" role="form">
                         @csrf
@@ -73,21 +73,21 @@
                     </form>
                 </div>
             </div>
-            <div class="tab-pane" id="values">
+            <div class="tab-pane <?= isset($_GET['id']) ? 'active' : '' ?>" id="values">
                 <div class="tile">
-                    <form action="{{ route('admin.attributes.update') }}" method="POST">
-                        <input form="hidden" name="attribute_id" value="{{$attribute->id}}">
+                    <form action="{{ route('admin.attributes.value.store') }}" method="POST">
                         @csrf
+                        <input type="hidden" name="attribute_id" value="{{$attribute->id}}">
                         <h3 class="tile-title">Attribute Values</h3>
                         <hr>
                         <div class="tile-body">
                             <div class="form-group">
                                 <label class="control-label" for="value">Value</label>
-                                <input class="form-control" type="text" placeholder="Enter attribute value" id="value" name="value" />
+                                <input class="form-control" value="<?= isset($av) ? $av->value : '' ?>" type="text" placeholder="Enter attribute value" id="value" name="value" required />
                             </div>
                             <div class="form-group">
                                 <label class="control-label" for="name">Price</label>
-                                <input class="form-control" type="number" placeholder="Enter attribute value price" id="price" name="price" />
+                                <input class="form-control" type="number" placeholder="Enter attribute value price" value="<?= isset($av) ? $av->price : '' ?>" id="price" name="price" required />
                             </div>
                         </div>
                         <div class="tile-footer">
@@ -122,8 +122,8 @@
                                         <td style="width: 25%" class="text-center">{{ $value->price}}</td>
                                         <td style="width: 25%" class="text-center">
                                             <div class="btn-group" role="group" aria-label="Second group">
-                                                <a href="{{ route('admin.attributes.edit', $value->id) }}" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></a>
-                                                <a href="{{ route('admin.attributes.delete', $value->id) }}" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>
+                                                <a href="{{ route('admin.attributes.edit', ['attribute_id' => $attribute->id, 'id' => $value->id]) }}" class="btn btn-sm btn-primary" id="values"><i class="fa fa-edit"></i></a>
+                                                <a href="{{ route('admin.attributes.value.delete', $value->id) }}" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>
                                             </div>
                                         </td>
                                     </tr>
