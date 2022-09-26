@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Models\AttributeValue;
-// use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 use App\Contracts\AttributeContract;
 use App\Http\Controllers\BaseController;
 
@@ -20,22 +20,17 @@ class AttributeValueController extends BaseController
 
     public function addValues(Request $request)
     {
-        $data = $request->all();
-        $attribute = AttributeValue::create($data);
+        $id = $request->value_id;
+        $data = array(
+            'attribute_id' => $request->attribute_id,
+            'value' => $request->value,
+            'price' => $request->price
+        );
 
-        return back()->with("Added",'Attribute value save successfully.');
+        DB::table('attribute_values')->updateOrInsert(['id' => $id], $data);
 
-    }
-
-    public function updateValues(Request $request)
-    {
-        $attributeValue = AttributeValue::findOrFail($request->input('valueId'));
-        $attributeValue->attribute_id = $request->input('id');
-        $attributeValue->value = $request->input('value');
-        $attributeValue->price = $request->input('price');
-        $attributeValue->save();
-
-        return response()->json($attributeValue);
+        return redirect()->route('admin.attributes.edit', ['attribute_id' => $request->attribute_id]);
+    
     }
 
     public function deleteValues($id)

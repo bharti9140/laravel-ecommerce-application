@@ -78,6 +78,7 @@
                     <form action="{{ route('admin.attributes.value.store') }}" method="POST">
                         @csrf
                         <input type="hidden" name="attribute_id" value="{{$attribute->id}}">
+                        <input type="hidden" name="value_id" value="<?= isset($av) ? $av->id : '' ?>">
                         <h3 class="tile-title">Attribute Values</h3>
                         <hr>
                         <div class="tile-body">
@@ -93,48 +94,58 @@
                         <div class="tile-footer">
                             <div class="row d-print-none mt-2">
                                 <div class="col-12 text-right">
+                                    <?php
+                                    $valueId = isset($av) ? $av->id : null;
+                                    ?>
+                                    @if($valueId)
                                     <button class="btn btn-success" type="submit">
-                                        <i class="fa fa-fw fa-lg fa-check-circle"></i>Save
+                                        <i class="fa fa-fw fa-lg fa-check-circle"></i>Update
                                     </button>
                                 </div>
+                                @else
+                                <button class="btn btn-success" type="submit">
+                                    <i class="fa fa-fw fa-lg fa-check-circle"></i>Save
+                                </button>
+                                @endif
                             </div>
                         </div>
-                    </form>
                 </div>
-                <div class="tile">
-                    <h3 class="tile-title">Option Values</h3>
-                    <div class="tile-body">
-                        <div class="table-responsive">
-                            <table class="table table-sm">
-                                <thead>
-                                    <tr class="text-center">
-                                        <th>#</th>
-                                        <th>Value</th>
-                                        <th>Price</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach($data as $value)
-                                    <tr v-for="value in values">
-                                        <td style="width: 25%" class="text-center">{{ $value->id}}</td>
-                                        <td style="width: 25%" class="text-center">{{ $value->value}}</td>
-                                        <td style="width: 25%" class="text-center">{{ $value->price}}</td>
-                                        <td style="width: 25%" class="text-center">
-                                            <div class="btn-group" role="group" aria-label="Second group">
-                                                <a href="{{ route('admin.attributes.edit', ['attribute_id' => $attribute->id, 'id' => $value->id]) }}" class="btn btn-sm btn-primary" id="values"><i class="fa fa-edit"></i></a>
-                                                <a href="{{ route('admin.attributes.value.delete', $value->id) }}" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </div>
+                </form>
+            </div>
+            <div class="tile">
+                <h3 class="tile-title">Option Values</h3>
+                <div class="tile-body">
+                    <div class="table-responsive">
+                        <table class="table table-sm">
+                            <thead>
+                                <tr class="text-center">
+                                    <th>#</th>
+                                    <th>Value</th>
+                                    <th>Price</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach($data as $value)
+                                <tr v-for="value in values">
+                                    <td style="width: 25%" class="text-center">{{ $value->id}}</td>
+                                    <td style="width: 25%" class="text-center">{{ $value->value}}</td>
+                                    <td style="width: 25%" class="text-center">{{ $value->price}}</td>
+                                    <td style="width: 25%" class="text-center">
+                                        <div class="btn-group" role="group" aria-label="Second group">
+                                            <a href="{{ route('admin.attributes.edit', ['attribute_id' => $attribute->id, 'id' => $value->id]) }}" class="btn btn-sm btn-primary" id="values"><i class="fa fa-edit"></i></a>
+                                            <a href="{{ route('admin.attributes.value.delete', $value->id) }}" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>
+                                        </div>
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 </div>
 @endsection
