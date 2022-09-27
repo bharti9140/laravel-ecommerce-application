@@ -15,20 +15,18 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedInteger('brand_id')->index();
+            $table->integer('brand_id')->index();
             $table->string('sku');
             $table->string('name');
             $table->string('slug');
             $table->text('description')->nullable();
-            $table->unsignedInteger('quantity');
+            $table->integer('quantity');
             $table->decimal('weight', 8, 2)->nullable();
             $table->string('price')->nullable();
             $table->string('sale_price')->nullable();
             $table->boolean('status')->default(1);
             $table->boolean('featured')->default(0);
-
             $table->foreign('brand_id')->references('id')->on('brands')->onDelete('cascade');
-
             $table->timestamps();
         });
     }

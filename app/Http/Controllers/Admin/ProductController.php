@@ -8,7 +8,11 @@ use App\Contracts\BrandContract;
 use App\Contracts\CategoryContract;
 use App\Contracts\ProductContract;
 use App\Http\Requests\StoreProductFormRequest;
-
+use App\Models\Product;
+use App\Models\ProductImage;
+use Attribute;
+use App\Contracts\AttributeContract;
+use App\Models\AttributeValue;
 class ProductController extends BaseController
 {
     protected $brandRepository;
@@ -17,14 +21,18 @@ class ProductController extends BaseController
 
     protected $productRepository;
 
+    protected $attributeRepository;
+
     public function __construct(
         BrandContract $brandRepository,
         CategoryContract $categoryRepository,
-        ProductContract $productRepository
+        ProductContract $productRepository,
+        AttributeContract $attributeRepository
     ) {
         $this->brandRepository = $brandRepository;
         $this->categoryRepository = $categoryRepository;
         $this->productRepository = $productRepository;
+        $this->attributeRepository = $attributeRepository;
     }
 
     public function index()
@@ -62,7 +70,14 @@ class ProductController extends BaseController
         $categories = $this->categoryRepository->listCategories('name', 'asc');
 
         $this->setPageTitle('Products', 'Edit Product');
-        return view('admin.products.edit', compact('categories', 'brands', 'product'));
+        $attributes = $this->attributeRepository->listAttributes();
+        
+        foreach($attributes as $attribute)
+        {
+            $attValue =  AttributeValue::where('attribute_id', $attribute->id)->get();
+        }
+        
+        return view('admin.products.edit', compact('categories', 'brands', 'product', 'attributes', 'attValue'));
     }
 
     public function update(StoreProductFormRequest $request)
