@@ -8,6 +8,8 @@ use App\Http\Controllers\Admin\AttributeController;
 use App\Http\Controllers\Admin\AttributeValueController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\ProductImageController;
+use App\Http\Controllers\Admin\ProductAttributeController;
 /*
 |--------------------------------------------------------------------------
 | ADMIN Routes
@@ -52,9 +54,10 @@ Route::group(['prefix'  =>  'admin'], function () {
 
         Route::post('/add-values/{id?}', [AttributeValueController::class, 'addValues'])->name('admin.attributes.value.store');
         Route::get('/{id}/delete-values', [AttributeValueController::class, 'deleteValues'])->name('admin.attributes.value.delete');
+        Route::get('/getattributevalues', [AttributeValueController::class, 'getValues'])->name('admin.attribute.getvalue');
     });
 
-    Route::group(['prefix'  =>   'brands'], function() {
+    Route::group(['prefix'  =>   'brands'], function () {
 
         Route::get('/', [BrandController::class, 'index'])->name('admin.brands.index');
         Route::get('/create', [BrandController::class, 'create'])->name('admin.brands.create');
@@ -71,5 +74,11 @@ Route::group(['prefix'  =>  'admin'], function () {
         Route::get('/edit/{id}', [ProductController::class, 'edit'])->name('admin.products.edit');
         Route::post('/update', [ProductController::class, 'update'])->name('admin.products.update');
         Route::get('/{id}/delete', [ProductController::class, 'delete'])->name('admin.products.delete');
-     });
+    });
+
+    Route::post('images/upload', [ProductImageController::class, 'upload'])->name('admin.products.images');
+    Route::get('images/{id}/delete', [ProductImageController::class, 'delete'])->name('admin.products.images.delete');
+
+    Route::post('attributes/add', [ProductAttributeController::class, 'addAttribute'])->name('admin.product.attribute');
+    Route::get('/{id}/delete', [ProductAttributeController::class, 'deleteAttribute'])->name('admin.product.attribute.delete');;
 });

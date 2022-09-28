@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\DB;
 use App\Contracts\AttributeContract;
 use App\Http\Controllers\BaseController;
 
-
 class AttributeValueController extends BaseController
 {
     protected $attributeRepository;
@@ -31,6 +30,12 @@ class AttributeValueController extends BaseController
 
         return redirect()->route('admin.attributes.edit', ['attribute_id' => $request->attribute_id]);
     
+    }
+
+    public function getValues(Request $request)
+    {
+        $data = AttributeValue::where('attribute_id', $request->id)->pluck('value','id')->toArray();
+        return response()->json( $data );
     }
 
     public function deleteValues($id)

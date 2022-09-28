@@ -13,6 +13,8 @@ use App\Models\ProductImage;
 use Attribute;
 use App\Contracts\AttributeContract;
 use App\Models\AttributeValue;
+use App\Models\ProductAttribute;
+
 class ProductController extends BaseController
 {
     protected $brandRepository;
@@ -71,13 +73,8 @@ class ProductController extends BaseController
 
         $this->setPageTitle('Products', 'Edit Product');
         $attributes = $this->attributeRepository->listAttributes();
-        
-        foreach($attributes as $attribute)
-        {
-            $attValue =  AttributeValue::where('attribute_id', $attribute->id)->get();
-        }
-        
-        return view('admin.products.edit', compact('categories', 'brands', 'product', 'attributes', 'attValue'));
+        $productAttributes = ProductAttribute::all();
+        return view('admin.products.edit', compact('categories', 'brands', 'product', 'attributes', 'productAttributes'));
     }
 
     public function update(StoreProductFormRequest $request)
