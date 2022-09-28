@@ -1,4 +1,3 @@
-{{dd(560)}}
 @extends('site.app')
 @section('title', 'Login')
 @section('content')
