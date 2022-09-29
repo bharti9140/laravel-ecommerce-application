@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use League\Flysystem\Config;
+use Config;
 class Setting extends Model
 {
     use HasFactory;

@@ -2,13 +2,13 @@
 
 namespace App\Providers;
 
+use Cart;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use App\Models\Category;
-use Illuminate\Support\Facades\Cart;
 class ViewComposerServiceProvider extends ServiceProvider
 {
-    use Cart;
+    // use Cart;
     /**
      * Register services.
      *

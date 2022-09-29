@@ -10,6 +10,8 @@ use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ProductImageController;
 use App\Http\Controllers\Admin\ProductAttributeController;
+use App\Http\Controllers\Admin\OrderController;
+
 /*
 |--------------------------------------------------------------------------
 | ADMIN Routes
@@ -80,5 +82,10 @@ Route::group(['prefix'  =>  'admin'], function () {
     Route::get('images/{id}/delete', [ProductImageController::class, 'delete'])->name('admin.products.images.delete');
 
     Route::post('attributes/add', [ProductAttributeController::class, 'addAttribute'])->name('admin.product.attribute');
-    Route::get('/{id}/delete', [ProductAttributeController::class, 'deleteAttribute'])->name('admin.product.attribute.delete');;
+    Route::get('/{id}/delete', [ProductAttributeController::class, 'deleteAttribute'])->name('admin.product.attribute.delete');
+
+    Route::group(['prefix' => 'orders'], function () {
+        Route::get('/', [OrderController::class, 'index'])->name('admin.orders.index');
+        Route::get('/{order}/show', [OrderController::class, 'show'])->name('admin.orders.show');
+     });
 });
