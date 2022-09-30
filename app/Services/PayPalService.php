@@ -36,7 +36,6 @@ class PayPalService
 
     public function processPayment($order)
     {
-        dd($order);
         // Add shipping amount if you want to charge for shipping
         $shipping = sprintf('%0.2f', 0);
         // Add any tax amount if you want to apply any tax rule
@@ -48,7 +47,7 @@ class PayPalService
         foreach ($order->items as $item) {
             $orderItems[$item->id] = new Item();
             $orderItems[$item->id]->setName($item->product->name)
-                ->setCurrency(config('settings.currency_code'))
+                ->setCurrency('USD')
                 ->setQuantity($item->quantity)
                 ->setPrice(sprintf('%0.2f', $item->price));
 
@@ -66,7 +65,7 @@ class PayPalService
 
         // Create chargeable amount
         $amount = new Amount();
-        $amount->setCurrency(config('settings.currency_code'))
+        $amount->setCurrency('USD')
             ->setTotal(sprintf('%0.2f', $order->grand_total))
             ->setDetails($details);
         // Creating a transaction

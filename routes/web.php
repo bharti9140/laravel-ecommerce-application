@@ -33,13 +33,12 @@ Route::get('/cart/clear',  [CartController::class,'clearCart'])->name('checkout.
 
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/checkout', [CheckoutController::class, 'getCheckout'])->name('checkout.index');
-    Route::post('/checkout/order', [CheckoutController::class, 'placeOrder'])->name('checkout.place.order');
+    Route::post('checkout/order', [CheckoutController::class, 'placeOrder'])->name('checkout.place.order');
     Route::get('checkout/payment/complete', [CheckoutController::class, 'complete'])->name('checkout.payment.complete');
     Route::get('account/orders', [AccountController::class, 'getOrders'])->name('account.orders');
 });
 
-
-require 'admin.php';
 Auth::routes();
+require 'admin.php';
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');

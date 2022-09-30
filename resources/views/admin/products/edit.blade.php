@@ -271,7 +271,7 @@
                                                 <td style="width: 25%" class="text-center">{{$data->quantity}}</td>
                                                 <td style="width: 25%" class="text-center">{{$data->price}}</td>
                                                 <td style="width: 25%" class="text-center">
-                                                    <a href="{{ route('admin.product.attribute.delete', $data->id) }}" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>
+                                                    <a href="{{ route('admin.product.attribute.delete', $data->id) }}" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure delete the product attribute?')"><i class="fa fa-trash"></i></a>
                                                 </td>
                                             </tr>
                                             @endforeach

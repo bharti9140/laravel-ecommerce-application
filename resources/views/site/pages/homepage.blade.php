@@ -2,6 +2,8 @@
 @section('title', 'Homepage')
 
 @section('content')
-<img src="/public/images/maketing.jpeg" title="Title of image" alt="alt text here">
-<h2>Homepage</h2>
+<h2 class="text-center">Ecommerc Homepage</h2>
+<div class = >
+<img src="images/img.jpg" class="w3-round-large" alt="Nature" style="width:100%" >
+</div>
 @stop

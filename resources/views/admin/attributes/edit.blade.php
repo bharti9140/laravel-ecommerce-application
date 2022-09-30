@@ -134,7 +134,7 @@
                                     <td style="width: 25%" class="text-center">
                                         <div class="btn-group" role="group" aria-label="Second group">
                                             <a href="{{ route('admin.attributes.edit', ['attribute_id' => $attribute->id, 'id' => $value->id]) }}" class="btn btn-sm btn-primary" id="values"><i class="fa fa-edit"></i></a>
-                                            <a href="{{ route('admin.attributes.value.delete', $value->id) }}" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>
+                                            <a href="{{ route('admin.attributes.value.delete', $value->id) }}" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure delete the attribute value?')"><i class="fa fa-trash"></i></a>
                                         </div>
                                     </td>
                                 </tr>

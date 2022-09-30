@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Contracts\OrderContract;
 use App\Http\Controllers\Controller;
 use App\Services\PayPalService;
+use App\Models\Order;
+use Cart;
 
 class CheckoutController extends Controller
 {
@@ -25,8 +27,16 @@ class CheckoutController extends Controller
 
     public function placeOrder(Request $request)
     {
+        $this->validate($request, [
+            'first_name'  =>  'required',
+            'last_name'   =>  'required',
+            'address' =>  'required',
+            'city'       =>  'required',
+            'country'    =>  'required',
+            'post_code'  =>  'required',
+            'phone_number' =>  'required',
+        ]);
         $order = $this->orderRepository->storeOrderDetails($request->all());
-
         if ($order) {
             $this->payPal->processPayment($order);
         }

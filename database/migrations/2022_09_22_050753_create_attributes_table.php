@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('attributes', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('code')->unique();
+            $table->string('code');
             $table->string('name');
             $table->enum('frontend_type', ['select', 'radio', 'text', 'text_area']);
             $table->boolean('is_filterable')->default(0);
