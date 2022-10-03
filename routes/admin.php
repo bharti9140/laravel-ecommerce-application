@@ -33,7 +33,6 @@ Route::group(['prefix'  =>  'admin'], function () {
         })->name('admin.dashboard');
         Route::get('/settings', [SettingController::class, 'index'])->name('admin.settings');
         Route::post('/settings', [SettingController::class, 'update'])->name('admin.settings.update');
-    });
 
     Route::group(['prefix'  =>   'categories'], function () {
 
@@ -88,4 +87,5 @@ Route::group(['prefix'  =>  'admin'], function () {
         Route::get('/', [OrderController::class, 'index'])->name('admin.orders.index');
         Route::get('/{order}/show', [OrderController::class, 'show'])->name('admin.orders.show');
      });
+    });
 });

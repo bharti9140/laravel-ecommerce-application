@@ -33,7 +33,7 @@ class AttributeController extends BaseController
     public function store(Request $request)
     {
         $this->validate($request, [
-            'code'          =>  'required',
+            'code'          =>  'required|unique:attributes',
             'name'          =>  'required',
             'frontend_type' =>  'required'
         ]);

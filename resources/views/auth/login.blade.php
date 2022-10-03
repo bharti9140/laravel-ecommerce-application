@@ -17,7 +17,7 @@
                     <form action="{{ route('login') }}" method="POST" role="form">
                         @csrf
                         <div class="form-group">
-                            <label for="email">E-Mail Address</label>
+                            <label for="email">Email Address</label>
                             <input type="email" class="form-control @error('email') is-invalid @enderror" name="email" id="email" value="{{ old('email') }}">
                             @error('email')
                             <span class="invalid-feedback" role="alert">
