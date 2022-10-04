@@ -58,13 +58,12 @@ class CategoryController extends BaseController
             'name'      =>  'required|max:191',
             'parent_id' =>  'required|not_in:0',
             'image'     =>  'mimes:jpg,jpeg,png|max:1000',
-            'slug'      =>  'required|unique:categories'
+            // 'slug'      =>  'required|unique:categories'
         ]);
 
         $params = $request->except('_token');
 
         $category = $this->categoryRepository->createCategory($params);
-
         if (!$category) {
             return $this->responseRedirectBack('Error occurred while creating category.', 'error', true, true);
         }

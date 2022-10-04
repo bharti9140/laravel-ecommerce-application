@@ -19,9 +19,10 @@ class ProductAttributeController extends Controller
     {
         $data = $request->all();
         $att = AttributeValue::where('id', $request->attribute_value)->first();
+        $id = $att->attribute_id;
         $value = isset($att['value']) ? $att['value'] : "";
         $productAttribute = ProductAttribute::create([
-            'attribute_id' => $request->attribute_value,
+            'attribute_id' => $id,
             'price' => $request->price,
             'quantity' => $request->pro_quantity,
             'value' =>  $value,

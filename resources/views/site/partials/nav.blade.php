@@ -10,8 +10,16 @@
                     @foreach($cat->items as $category)
                         @if ($category->items->count() > 0)
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="{{ route('category.show', $category->slug) }}" id="{{ $category->slug }}"
+                                @if($category->menu)
+                                <a class="nav-link dropdown-toggle" href="{{ route('category.show', $category->slug) }}" 
+                                id="{{ $category->slug }}"
                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ $category->name }}</a>
+                                   @endif
+                                @if($category->featured)
+                                <a class="nav-link dropdown-toggle" href="{{ route('category.show', $category->slug) }}" 
+                                id="{{ $category->slug }}"
+                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ $category->name }}</a>
+                                @endif
                                 <div class="dropdown-menu" aria-labelledby="{{ $category->slug }}">
                                     @foreach($category->items as $item)
                                         <a class="dropdown-item" href="{{ route('category.show', $item->slug) }}">{{ $item->name }}</a>

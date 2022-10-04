@@ -71,6 +71,7 @@ class CategoryRepository extends BaseRepository implements CategoryContract
             }
 
             $featured = $collection->has('featured') ? 1 : 0;
+            
             $menu = $collection->has('menu') ? 1 : 0;
 
             $merge = $collection->merge(compact('menu', 'image', 'featured'));
@@ -146,6 +147,7 @@ class CategoryRepository extends BaseRepository implements CategoryContract
         return Category::with('products')
             ->where('slug', $slug)
             ->where('menu', 1)
+            ->orWhere('featured', 1)
             ->first();
     }
 }

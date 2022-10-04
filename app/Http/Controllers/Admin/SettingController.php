@@ -6,6 +6,7 @@ use App\Http\Controllers\BaseController;
 use Illuminate\Http\Request;
 use App\Traits\UploadAble;
 use App\Models\Setting;
+use Illuminate\Http\UploadedFile;
 
 class SettingController extends BaseController
 {

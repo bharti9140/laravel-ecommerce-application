@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Category;
 use Illuminate\Database\Seeder;
+use Faker\Factory as Faker;
 
 class CategoriesTableSeeder extends Seeder
 {
@@ -14,6 +15,8 @@ class CategoriesTableSeeder extends Seeder
      */
     public function run()
     {
+        $faker = Faker::create();
+
         Category::create([
             'name'          =>  'Root',
             'description'   =>  'This is the root category, don\'t delete this one',
@@ -21,6 +24,6 @@ class CategoriesTableSeeder extends Seeder
             'menu'          =>  0,
         ]);
 
-        factory('App\Models\Category', 10)->create();
+        // factory('App\Models\Category', 10)->create();
     }
 }
