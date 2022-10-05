@@ -18,7 +18,7 @@ return new class extends Migration
             $table->integer('brand_id')->index();
             $table->string('sku');
             $table->string('name');
-            $table->string('slug');
+            $table->string('slug')->unique();
             $table->text('description')->nullable();
             $table->integer('quantity');
             $table->decimal('weight', 8, 2)->nullable();

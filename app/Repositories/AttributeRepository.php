@@ -97,7 +97,12 @@ class AttributeRepository extends BaseRepository implements AttributeContract
     public function deleteAttribute($id)
     {
         $attribute = $this->findAttributeById($id);
-
+        $attributeValues = $attribute->values;
+        if($attributeValues){
+            foreach($attributeValues as $values){
+                $values->delete();
+            }
+        }
         $attribute->delete();
 
         return $attribute;

@@ -28,10 +28,10 @@ Route::group(['prefix'  =>  'admin'], function () {
 
     Route::group(['middleware' => ['auth:admin']], function () {
 
-        Route::get('/', function () {
+/*        Route::get('/', function () {
             return view('admin.dashboard.index');
-        })->name('admin.dashboard');
-        Route::get('/settings', [SettingController::class, 'index'])->name('admin.settings');
+        })->name('admin.dashboard');*/
+        Route::get('/', [SettingController::class, 'index'])->name('admin.settings');
         Route::post('/settings', [SettingController::class, 'update'])->name('admin.settings.update');
 
     Route::group(['prefix'  =>   'categories'], function () {

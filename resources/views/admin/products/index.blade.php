@@ -32,7 +32,11 @@
                             <td>{{ $product->id }}</td>
                             <td>{{ $product->sku }}</td>
                             <td>{{ $product->name }}</td>
-                            <td>{{ $product->brand->name }}</td>
+                            <td>
+                            @if($product->brand)
+                            <span class="badge badge-info">{{ $product->brand->name }}</span>
+                            </td>
+                            @endif
                             <td>
                                 @foreach($product->categories as $category)
                                 <span class="badge badge-info">{{ $category->name }}</span>
