@@ -5,9 +5,10 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\BaseController;
 use Illuminate\Http\Request;
 use App\Contracts\BrandContract;
-
+use App\Traits\UploadAble;
 class BrandController extends BaseController
 {
+    use UploadAble;
     /**
      * @var BrandContract
      */
@@ -104,7 +105,19 @@ class BrandController extends BaseController
      */
     public function delete($id)
     {
-        $brand = $this->brandRepository->deleteBrand($id);
+        // $brand = $this->brandRepository->deleteBrand($id);
+        $brand = $this->brandRepository->findBrandById($id);
+        $products = $brand->products;
+        foreach ($products as $product) {
+            if ($product) {
+                return $this->responseRedirectBack('Brand not deleted.', 'error', true, true);
+            }
+        }
+        if ($brand->logo != null) {
+            $this->deleteOne($brand->logo);
+        }
+
+        $brand->delete();
 
         if (!$brand) {
             return $this->responseRedirectBack('Error occurred while deleting brand.', 'error', true, true);

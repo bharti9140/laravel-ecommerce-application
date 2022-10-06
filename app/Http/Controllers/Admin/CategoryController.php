@@ -5,13 +5,14 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Contracts\CategoryContract;
 use App\Http\Controllers\BaseController;
-
+use App\Traits\UploadAble;
 /**
  * Class CategoryController
  * @package App\Http\Controllers\Admin
  */
 class CategoryController extends BaseController
 {
+    use UploadAble;
     /**
      * @var CategoryContract
      */
@@ -58,7 +59,6 @@ class CategoryController extends BaseController
             'name'      =>  'required|max:191',
             'parent_id' =>  'required|not_in:0',
             'image'     =>  'mimes:jpg,jpeg,png|max:1000',
-            'slug'      =>  'required|unique:categories'
         ]);
         $params = $request->except('_token');
 
@@ -109,8 +109,19 @@ class CategoryController extends BaseController
      */
     public function delete($id)
     {
-        $category = $this->categoryRepository->deleteCategory($id);
+        // $category = $this->categoryRepository->deleteCategory($id);
+        $category = $this->categoryRepository->findCategoryById($id);
+        $products = $category->products;
+        foreach ($products as $product) {
+            if ($product) {
+            return $this->responseRedirectBack('Category not deleted.', 'error', true, true);
+            }
+        }
+        if ($category->image != null) {
+            $this->deleteOne($category->image);
+        }
 
+        $category->delete();
         if (!$category) {
             return $this->responseRedirectBack('Error occurred while deleting category.', 'error', true, true);
         }

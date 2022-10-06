@@ -73,7 +73,8 @@ class ProductController extends BaseController
 
         $this->setPageTitle('Products', 'Edit Product');
         $attributes = $this->attributeRepository->listAttributes();
-        $productAttributes = ProductAttribute::all();
+        // $productAttributes = ProductAttribute::all();
+        $productAttributes = ProductAttribute::where('product_id', $id)->get();
         return view('admin.products.edit', compact('categories', 'brands', 'product', 'attributes', 'productAttributes'));
     }
 

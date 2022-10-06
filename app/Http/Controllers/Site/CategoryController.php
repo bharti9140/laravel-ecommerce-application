@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Site;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Contracts\CategoryContract;
+use App\Models\Category;
 
 class CategoryController extends Controller
 {
@@ -17,8 +18,7 @@ class CategoryController extends Controller
 
     public function show($slug)
     {
-        $category = $this->categoryRepository->findBySlug($slug);
-
+        $category = Category::where('slug', $slug)->first();
         return view('site.pages.category', compact('category'));
     }
 }

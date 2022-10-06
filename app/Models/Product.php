@@ -36,9 +36,17 @@ class Product extends Model
     public function setNameAttribute($value)
     {
         $this->attributes['name'] = $value;
-        $this->attributes['slug'] = Str::slug($value);
+        $slugName = $this->uniqueSlug($value);
+        $slug = $this->attributes['slug'] = $slugName;
     }
 
+    public function uniqueSlug($name) {
+        $slug = str::slug($name, '-');
+        $count = Product::where('slug', 'Like', "{$slug}%")->count();
+        $newCount = $count > 0 ? ++$count : '';
+
+        return $newCount > 0 ? "$slug-$newCount" : $slug;
+    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

@@ -24,7 +24,16 @@ class Category extends Model
     public function setNameAttribute($value)
     {
         $this->attributes['name'] = $value;
-        $this->attributes['slug'] = str::slug($value);
+        $slugName = $this->uniqueSlug($value);
+        $slug = $this->attributes['slug'] = $slugName;
+    }
+
+    public function uniqueSlug($name) {
+        $slug = str::slug($name, '-');
+        $count = Category::where('slug', 'Like', "{$slug}%")->count();
+        $newCount = $count > 0 ? ++$count : '';
+
+        return $newCount > 0 ? "$slug-$newCount" : $slug;
     }
 
     public function parent()
