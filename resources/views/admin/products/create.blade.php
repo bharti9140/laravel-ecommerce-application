@@ -113,13 +113,13 @@
                                     </label>
                                 </div>
                             </div>
-                            <div class="form-group">
+                            <!-- <div class="form-group">
                                 <div class="form-check">
                                     <label class="form-check-label">
                                         <input class="form-check-input" type="checkbox" id="featured" name="featured" />Featured
                                     </label>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                         <div class="tile-footer">
                             <div class="row d-print-none mt-2">

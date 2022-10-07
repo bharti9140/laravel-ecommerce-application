@@ -78,6 +78,7 @@
                                     <option> Choose...</option>
                                     <option value="United Kingdom">United Kingdom</option>
                                     <option value="France">France</option>
+                                    <option value="India">India</option>
                                     <option value="United States" selected="">United States</option>
                                 </select>
                             </div>

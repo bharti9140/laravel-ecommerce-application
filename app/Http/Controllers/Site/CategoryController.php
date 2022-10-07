@@ -20,7 +20,7 @@ class CategoryController extends Controller
     {
         $category = Category::where('slug', $slug)->first();
         if(!$category){
-            return redirect()->back()->route('/', 'site.pages.homepage');
+            return redirect()->back()->with('Category not found');
         }
         return view('site.pages.category', compact('category'));
     }
