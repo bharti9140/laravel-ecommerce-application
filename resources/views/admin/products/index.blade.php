@@ -23,7 +23,7 @@
                             <th class="text-center"> Categories </th>
                             <th class="text-center"> Price </th>
                             <th class="text-center"> Status </th>
-                            <th style="width:100px; min-width:100px;" class="text-center text-danger"><i class="fa fa-bolt"> </i></th>
+                            <th style="width:100px; min-width:100px;" class="text-center text-danger" data-orderable="false"><i class="fa fa-bolt"> </i></th>
                         </tr>
                     </thead>
                     <tbody>

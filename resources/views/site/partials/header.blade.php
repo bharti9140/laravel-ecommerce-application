@@ -1,3 +1,4 @@
+@include('site.partials.flash')
 <header class="section-header">
     <section class="header-main">
         <div class="container">
@@ -10,13 +11,19 @@
                     </div>
                 </div>
                 <div class="col-lg-6 col-sm-6">
-                    <form action="#" class="search-wrap">
+                    <form action="{{ route('product.search') }}" method="GET" class="search-wrap">
+                        @csrf
                         <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Search">
+                            <input type="text" class="form-control" placeholder="Search" name="search">
                             <div class="input-group-append">
                                 <button class="btn btn-primary" type="submit">
                                     <i class="fa fa-search"></i>
                                 </button>
+                                @error('search')
+                                <div class="invalid-feedback d-block" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </div>
+                                @enderror
                             </div>
                         </div>
                     </form>
@@ -51,7 +58,7 @@
                                     {{ Auth::user()->full_name }} <span class="caret"></span>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="{{ route('account.orders') }}">Orders</a>
+                                    <a class="dropdown-item" href="{{ route('account.orders') }}">Orders</a>
                                     <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}

@@ -4,10 +4,11 @@ namespace App\Http\Controllers\Site;
 
 use Cart;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-
-class CartController extends Controller
+use App\Http\Controllers\BaseController;
+use App\Traits\UploadAble;
+class CartController extends BaseController
 {
+    use UploadAble;
     public function getCart()
     {
         return view('site.pages.cart');
@@ -20,13 +21,13 @@ class CartController extends Controller
         if (Cart::isEmpty()) {
             return redirect('/');
         }
-        return redirect()->back()->with('message', 'Item removed from cart successfully.');
+        return $this->responseRedirectBack('Item removed from cart successfully', 'success', false, false);
     }
 
     public function clearCart()
     {
         Cart::clear();
 
-        return redirect('/');
+        return $this->responseRedirectBack('All Cart clear successfully', 'success', false, false);
     }
 }

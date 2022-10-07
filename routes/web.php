@@ -21,15 +21,19 @@ use App\Http\Controllers\Site\AccountController;
 
 Route::view('/', 'site.pages.homepage');
 
-Route::get('/category/{slug}', [CategoryController::class,'show'])->name('category.show');
+Route::get('/category/{slug}', [CategoryController::class, 'show'])->name('category.show');
 
-Route::get('/product/{slug}', [ProductController::class,'show'])->name('product.show');
+Route::get('/product/{slug}', [ProductController::class, 'show'])->name('product.show');
 
-Route::post('/product/add/cart', [ProductController::class,'addToCart'])->name('product.add.cart');
+Route::post('/product/add/cart', [ProductController::class, 'addToCart'])->name('product.add.cart');
 
-Route::get('/cart', [CartController::class,'getCart'])->name('checkout.cart');
-Route::get('/cart/item/{id}/remove', [CartController::class,'removeItem'])->name('checkout.cart.remove');
-Route::get('/cart/clear',  [CartController::class,'clearCart'])->name('checkout.cart.clear');
+
+Route::get('/search', [ProductController::class, 'searchProduct'])->name('product.search');
+
+
+Route::get('/cart', [CartController::class, 'getCart'])->name('checkout.cart');
+Route::get('/cart/item/{id}/remove', [CartController::class, 'removeItem'])->name('checkout.cart.remove');
+Route::get('/cart/clear',  [CartController::class, 'clearCart'])->name('checkout.cart.clear');
 
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/checkout', [CheckoutController::class, 'getCheckout'])->name('checkout.index');

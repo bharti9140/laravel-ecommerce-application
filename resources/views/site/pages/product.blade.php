@@ -1,8 +1,8 @@
 @extends('site.app')
 @section('title', $product->name)
 @section('content')
-    <section class="section-pagetop bg-dark">
-        <div class="container clearfix">
+<section class="section-pagetop bg-dark">
+    <div class="container clearfix">
             <h2 class="title-page">{{ $product->name }}</h2>
         </div>
     </section>
