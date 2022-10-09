@@ -5,9 +5,13 @@
             <div class="row align-items-center">
                 <div class="col-lg-3">
                     <div class="brand-wrap">
+                        @if (config('settings.site_logo') != null)
                         <a href="{{ url('/') }}">
-                            <img class="logo" src="{{ asset('frontend/images/logo-dark.png') }}" alt="logo">
+                            <img src="{{ asset('storage/'.config('settings.site_logo')) }}" id="logoImg" style="width: 80px; height: auto;">
                         </a>
+                        @else
+                            <img class="logo" src="{{ asset('frontend/images/logo-dark.png') }}" alt="logo">
+                        @endif
                     </div>
                 </div>
                 <div class="col-lg-6 col-sm-6">

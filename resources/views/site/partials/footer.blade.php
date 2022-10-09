@@ -42,10 +42,10 @@
                         </p>
 
                         <div class="btn-group white">
-                            <a class="btn btn-facebook" title="Facebook" target="_blank" href="#"><i class="fab fa-facebook-f  fa-fw"></i></a>
-                            <a class="btn btn-instagram" title="Instagram" target="_blank" href="#"><i class="fab fa-instagram  fa-fw"></i></a>
-                            <a class="btn btn-youtube" title="Youtube" target="_blank" href="#"><i class="fab fa-youtube  fa-fw"></i></a>
-                            <a class="btn btn-twitter" title="Twitter" target="_blank" href="#"><i class="fab fa-twitter  fa-fw"></i></a>
+                            <a class="btn btn-facebook" title="Facebook" target="_blank" href="https://www.facebook.com/"><i class="fab fa-facebook-f  fa-fw"></i></a>
+                            <a class="btn btn-instagram" title="Instagram" target="_blank" href="https://www.instagram.com/"><i class="fab fa-instagram  fa-fw"></i></a>
+                            <a class="btn btn-youtube" title="Youtube" target="_blank" href="https://www.youtube.com/"><i class="fab fa-youtube  fa-fw"></i></a>
+                            <a class="btn btn-twitter" title="Twitter" target="_blank" href="https://twitter.com/i/flow/login"><i class="fab fa-twitter  fa-fw"></i></a>
                         </div>
                     </article>
                 </aside>
@@ -63,7 +63,7 @@
                 <p class="text-md-right text-white-50">
                     Copyright &copy
                     <br>
-                    <a href="http://bootstrap-ecommerce.com" class="text-white-50">Bootstrap-ecommerce UI kit</a>
+                    <a href="http://bootstrap-ecommerce.com" class="text-white-50">{{ config('settings.footer_copyright_text') }}</a>
                 </p>
             </div>
         </section>
