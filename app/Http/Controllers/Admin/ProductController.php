@@ -96,7 +96,16 @@ class ProductController extends BaseController
      */
     public function delete($id)
     {
-        $product = $this->productRepository->deleteProduct($id);
+        $product = $this->productRepository->findProductById($id);
+        $attributes = $product->attributes;
+        foreach($attributes as $attribute){
+            if($attribute)
+            {
+                return $this->responseRedirectBack('Delete the attributes before deleting the product.', 'error', true, true);
+            }
+        }
+
+        $product->delete();
 
         if (!$product) {
             return $this->responseRedirectBack('Error occurred while deleting category.', 'error', true, true);
