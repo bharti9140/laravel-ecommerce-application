@@ -1,6 +1,8 @@
 @extends('site.app')
 @section('title', 'Homepage')
-
+@section('seo_meta_description')
+    <meta property="og:description" content="{{ config('settings.seo_meta_description') }}">
+@endsection
 @section('content')
 <div>
     <marquee class="marq" behavior=alternate direction="right">
