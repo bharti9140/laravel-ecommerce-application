@@ -13,28 +13,22 @@ class CartController extends BaseController
     public function getCart()
     {
         $carts =  \Cart::getContent();
-
-        $cartLists = $carts->unique(function ($item) {
-                    return $item['name'].$item['price'];
-                });
-
-        $cartLists->all();
         $cartValues =  $carts->groupBy('name');
-        $newCart = [];
+        $cartLists = [];
         foreach($cartValues as $key => $cart){
             $qty[] = $cart->sum('quantity');
-            $art = [
+            $newCart = [
+                'id'   => $cart[0]['id'],
                 'name' => $cart[0]['name'],
                 'price' => $cart[0]['price'],
                 'quantity' => $cart->sum('quantity'),
+                'attributes'=> $cart[0]['attributes'],
+                'conditions'  => $cart[0]['conditions']
             ];
-
-            array_push($newCart, $art);
-
+            array_push($cartLists, $newCart);
         }
-        // return view('site.pages.cart', compact('cartLists'));
-        // $total = Cart::getTotalQuantity();
-        return view('site.pages.cart');
+        return view('site.pages.cart', compact('cartLists'));
+
     }
 
     public function removeItem($id)

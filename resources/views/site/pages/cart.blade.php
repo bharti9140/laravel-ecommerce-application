@@ -31,13 +31,13 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach(\Cart::getContent() as $item)
+                            @foreach($cartLists as $item)
                             <tr>
                                 <td>
                                     <figure class="media">
                                         <figcaption class="media-body">
-                                            <h6 class="title text-truncate">{{ Str::words($item->name,20) }}</h6>
-                                            @foreach($item->attributes as $key => $value)
+                                            <h6 class="title text-truncate">{{ Str::words($item['name'],20) }}</h6>
+                                            @foreach($item['attributes'] as $key => $value)
                                             <dl class="dlist-inline small">
                                                 <dt>{{ ucwords($key) }}: </dt>
                                                 <dd>{{ ucwords($value) }}</dd>
@@ -47,16 +47,16 @@
                                     </figure>
                                 </td>
                                 <td>
-                                    <var class="price">{{ $item->quantity }}</var>
+                                    <var class="price">{{ $item['quantity'] }}</var>
                                 </td>
                                 <td>
                                     <div class="price-wrap">
-                                        <var class="price">{{ config('settings.currency_symbol'). $item->price }}</var>
+                                        <var class="price">{{ config('settings.currency_symbol'). $item['price'] }}</var>
                                         <small class="text-muted">each</small>
                                     </div>
                                 </td>
                                 <td class="text-right">
-                                    <a href="{{ route('checkout.cart.remove', $item->id) }}" class="btn btn-outline-danger"><i class="fa fa-times"></i> </a>
+                                    <a href="{{ route('checkout.cart.remove', $item['id']) }}" class="btn btn-outline-danger"><i class="fa fa-times"></i> </a>
                                 </td>
                             </tr>
                             @endforeach
