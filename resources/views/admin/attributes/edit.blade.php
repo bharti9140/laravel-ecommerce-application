@@ -11,14 +11,14 @@
     <div class="col-md-3">
         <div class="tile p-0">
             <ul class="nav flex-column nav-tabs user-tabs">
-                <li class="nav-item"><a class="nav-link active" href="#general" data-toggle="tab">General</a></li>
-                <li class="nav-item"><a class="nav-link" href="#values" data-toggle="tab">Attribute Values</a></li>
+                <li class="nav-item"><a class="nav-link" href="#general" data-toggle="tab">General</a></li>
+                <li class="nav-item"><a class="nav-link active" href="#values" data-toggle="tab">Attribute Values</a></li>
             </ul>
         </div>
     </div>
     <div class="col-md-9">
         <div class="tab-content">
-            <div class="tab-pane <?= isset($_GET['id']) ? '' : 'active' ?>" id="general">
+            <div class="tab-pane  <?= isset($_GET['id']) ? '' : 'active' ?>" id="general">
                 <div class="tile">
                     <form action="{{ route('admin.attributes.update') }}" method="POST" role="form">
                         @csrf
@@ -47,20 +47,6 @@
                                     @endforeach
                                 </select>
                             </div>
-                           <!--  <div class="form-group">
-                                <div class="form-check">
-                                    <label class="form-check-label">
-                                        <input class="form-check-input" type="checkbox" id="is_filterable" name="is_filterable" {{ $attribute->is_filterable == 1 ? 'checked' : '' }} />Filterable
-                                    </label>
-                                </div>
-                            </div> -->
-                            <!-- <div class="form-group">
-                                <div class="form-check">
-                                    <label class="form-check-label">
-                                        <input class="form-check-input" type="checkbox" id="is_required" name="is_required" {{ $attribute->is_required == 1 ? 'checked' : '' }} />Required
-                                    </label>
-                                </div>
-                            </div> -->
                         </div>
                         <div class="tile-footer">
                             <div class="row d-print-none mt-2">

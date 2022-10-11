@@ -28,7 +28,9 @@ class AttributeValueController extends BaseController
 
         DB::table('attribute_values')->updateOrInsert(['id' => $id], $data);
 
-        return redirect()->route('admin.attributes.edit', ['attribute_id' => $request->attribute_id]);
+        // return redirect()->route('admin.attributes.edit', ['attribute_id' => $request->attribute_id]);
+
+        return redirect()->to('/admin/attributes/7/edit?id=' . $id);
     
     }
 

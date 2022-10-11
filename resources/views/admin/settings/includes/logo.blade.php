@@ -1,3 +1,4 @@
+<div class="tab-pane" id="site-logo">
 <div class="tile">
     <form action="{{ route('admin.settings.update') }}" method="POST" role="form" enctype="multipart/form-data">
         @csrf
@@ -43,6 +44,7 @@
             </div>
         </div>
     </form>
+</div>
 </div>
 @push('scripts')
 <script>

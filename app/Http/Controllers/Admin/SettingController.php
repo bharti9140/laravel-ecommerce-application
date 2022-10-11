@@ -27,7 +27,6 @@ class SettingController extends BaseController
     public function update(Request $request)
     {
         if ($request->has('site_logo') && ($request->file('site_logo') instanceof UploadedFile)) {
-
             if (config('settings.site_logo') != null) {
                 $this->deleteOne(config('settings.site_logo'));
             }
@@ -43,10 +42,26 @@ class SettingController extends BaseController
         } else {
 
             $keys = $request->except('_token');
-
             foreach ($keys as $key => $value) {
                 Setting::set($key, $value);
             }
+        }
+
+        if($request->has('site_logo') || $request->has('site_favicon') ){
+            return back()->withInput(['tab'=>'site-logo'])->with('success','Settings updated successfully');
+        }
+        if($request->has('footer_copyright_text') || $request->has('seo_meta_title') || $request->has('seo_meta_description')){
+            return back()->withInput(['tab'=>'footer-seo'])->with('success','Settings updated successfully');
+        }
+        if($request->has('social_facebook') || $request->has('social_twitter') || $request->has('social_instagram')){
+            return back()->withInput(['tab'=>'social-links'])->with('success','Settings updated successfully');
+        }
+        if($request->has('google_analytics') || $request->has('facebook_pixels')){
+            return back()->withInput(['tab'=>'analytics'])->with('success','Settings updated successfully');
+        }
+        if($request->has('stripe_payment_method') || $request->has('stripe_key') || $request->has('stripe_secret_key') || $request->has('paypal_payment_method')
+        ||$request->has('paypal_client_id') || $request->has('paypal_secret_id')){
+            return back()->withInput(['tab'=>'payments'])->with('success','Settings updated successfully');
         }
         return $this->responseRedirectBack('Settings updated successfully.', 'success');
     }

@@ -16,10 +16,10 @@
                 <label class="control-label" for="social_instagram">Instagram Profile</label>
                 <input class="form-control" type="text" placeholder="Enter instagram profile link" id="social_instagram" name="social_instagram" value="{{ config('settings.social_instagram') }}" />
             </div>
-            <div class="form-group">
+            <!-- <div class="form-group">
                 <label class="control-label" for="social_linkedin">LinkedIn Profile</label>
                 <input class="form-control" type="text" placeholder="Enter linkedin profile link" id="social_linkedin" name="social_linkedin" value="{{ config('settings.social_linkedin') }}" />
-            </div>
+            </div> -->
         </div>
         <div class="tile-footer">
             <div class="row d-print-none mt-2">
