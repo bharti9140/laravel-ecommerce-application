@@ -31,8 +31,7 @@ class ProductImageController extends Controller
 
             $product->images()->save($productImage);
         }
-
-        return back()->with("Images", 'Upload successfully.');
+        return back()->withInput(['tab'=>'images'])->with('success','Image uploaded successfully');
     }
 
     public function delete($id)
@@ -44,6 +43,6 @@ class ProductImageController extends Controller
         }
         $image->delete();
 
-        return redirect()->back();
+        return back()->withInput(['tab'=>'images'])->with('success','Image deleted successfully');
     }
 }

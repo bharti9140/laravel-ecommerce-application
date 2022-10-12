@@ -30,7 +30,7 @@ class ProductAttributeController extends Controller
         ]);
 
         if ($productAttribute) {
-            return back()->with("Product", 'Attribute value Added successfully.');
+            return back()->withInput(['tab'=>'attributes'])->with("success", 'Product attribute value Added successfully.');
         } else {
             return response()->json(['message' => 'Something went wrong while submitting product attribute.']);
         }
@@ -45,6 +45,6 @@ class ProductAttributeController extends Controller
         $productAttribute = ProductAttribute::findOrFail($id);
         $productAttribute->delete();
 
-        return back()->with("Product", 'Attribute value deleted successfully.');
+        return back()->withInput(['tab'=>'attributes'])->with("success", 'Product attribute value deleted successfully.');
     }
 }

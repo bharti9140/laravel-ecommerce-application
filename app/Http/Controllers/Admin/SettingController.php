@@ -46,8 +46,7 @@ class SettingController extends BaseController
                 Setting::set($key, $value);
             }
         }
-
-        if($request->has('site_logo') || $request->has('site_favicon') ){
+        if((config('settings.site_logo') != null) || (config('settings.site_favicon') != null)){
             return back()->withInput(['tab'=>'site-logo'])->with('success','Settings updated successfully');
         }
         if($request->has('footer_copyright_text') || $request->has('seo_meta_title') || $request->has('seo_meta_description')){

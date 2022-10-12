@@ -7,7 +7,7 @@ use App\Models\AttributeValue;
 use Illuminate\Support\Facades\DB;
 use App\Contracts\AttributeContract;
 use App\Http\Controllers\BaseController;
-
+use Carbon\Carbon;
 class AttributeValueController extends BaseController
 {
     protected $attributeRepository;
@@ -20,17 +20,18 @@ class AttributeValueController extends BaseController
     public function addValues(Request $request)
     {
         $id = $request->value_id;
+
         $data = array(
             'attribute_id' => $request->attribute_id,
             'value' => $request->value,
-            'price' => $request->price
+            'price' => $request->price,
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
         );
 
         DB::table('attribute_values')->updateOrInsert(['id' => $id], $data);
 
-        // return redirect()->route('admin.attributes.edit', ['attribute_id' => $request->attribute_id]);
-
-        return redirect()->to('/admin/attributes/7/edit?id=' . $id);
+        return back()->withInput(['tab'=>'values'])->with('success','Attribute Value added successfully');
     
     }
 
@@ -44,6 +45,6 @@ class AttributeValueController extends BaseController
     {
         $attributeValue = AttributeValue::findOrFail($id);
         $attributeValue->delete();
-        return back()->with("Delete",'Attribute value deleted successfully.');
+        return back()->withInput(['tab'=>'values'])->with('success','Attribute Value deleted successfully');
     }
 }
