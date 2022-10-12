@@ -10,9 +10,9 @@
 <div class="row user">
     <div class="col-md-3">
         <div class="tile p-0">
-            <ul class="nav flex-column nav-tabs user-tabs">
-                <li class="nav-item"><a class="nav-link" href="#general" data-toggle="tab">General</a></li>
-                <li class="nav-item"><a class="nav-link active" href="#values" data-toggle="tab">Attribute Values</a></li>
+            <ul class="nav flex-column nav-tabs user-tabs" id="tabIds">
+                <li class="nav-item"><a class="nav-link active" href="#general" data-toggle="tab" role="tab">General</a></li>
+                <li class="nav-item"><a class="nav-link" href="#values" data-toggle="tab" role="tab">Attribute Values</a></li>
             </ul>
         </div>
     </div>
@@ -59,7 +59,7 @@
                     </form>
                 </div>
             </div>
-            <div class="tab-pane <?= isset($_GET['id']) ? 'active' : '' ?>" id="values">
+            <div class="tab-pane <?= (isset($_GET['id']))||(old('tab') == 'values') ? 'active' : 'null' ?>" id="values" role="tabpanel">
                 <div class="tile">
                     <form action="{{ route('admin.attributes.value.store') }}" method="POST">
                         @csrf
@@ -87,6 +87,7 @@
                                     <button class="btn btn-success" type="submit">
                                         <i class="fa fa-fw fa-lg fa-check-circle"></i>Update
                                     </button>
+                                    <a class="btn btn-danger" href="{{ route('admin.attributes.edit', ['attribute_id' => $attribute->id]) }}"><i class="fa fa-fw fa-lg fa-arrow-left"></i>Go Back</a>
                                 </div>
                                 @else
                                 <button class="btn btn-success" type="submit">
@@ -135,3 +136,10 @@
 </div>
 </div>
 @endsection
+@push('scripts')
+<script>
+    $(document).ready(function() {
+        $('#tabIds a[href="#{{ old('tab') }}"]').tab('show');
+    });
+</script>
+@endpush

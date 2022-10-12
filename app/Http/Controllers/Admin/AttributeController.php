@@ -81,7 +81,17 @@ class AttributeController extends BaseController
 
     public function delete($id)
     {
-        $attribute = $this->attributeRepository->deleteAttribute($id);
+        // $attribute = $this->attributeRepository->deleteAttribute($id);
+        $attribute = $this->attributeRepository->findAttributeById($id);
+        $attributeValues = $attribute->values;
+        if($attributeValues){
+            foreach($attributeValues as $values){
+                if($values){
+                    return $this->responseRedirectBack('Delete the attribute values and products attribute before deleting the Attribute.', 'error', true, true);
+                }
+            }
+        }
+        $attribute->delete();
 
         if (!$attribute) {
             return $this->responseRedirectBack('Error occurred while deleting attribute.', 'error', true, true);

@@ -60,7 +60,7 @@ class ProductController extends BaseController
         if (count($products) > 0) {
             return view('site.pages.product', compact('product', 'attributes'));
         } else {
-            return $this->responseRedirectBack('Product not deleted 😔.', 'error', true, true);
+            return $this->responseRedirectBack('Product not Found 😔.', 'error', true, true);
         }
     }
 }

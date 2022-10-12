@@ -46,22 +46,31 @@ class SettingController extends BaseController
                 Setting::set($key, $value);
             }
         }
-        if((config('settings.site_logo') != null) || (config('settings.site_favicon') != null)){
-            return back()->withInput(['tab'=>'site-logo'])->with('success','Settings updated successfully');
-        }
+
         if($request->has('footer_copyright_text') || $request->has('seo_meta_title') || $request->has('seo_meta_description')){
             return back()->withInput(['tab'=>'footer-seo'])->with('success','Settings updated successfully');
         }
+
         if($request->has('social_facebook') || $request->has('social_twitter') || $request->has('social_instagram')){
             return back()->withInput(['tab'=>'social-links'])->with('success','Settings updated successfully');
         }
+
         if($request->has('google_analytics') || $request->has('facebook_pixels')){
             return back()->withInput(['tab'=>'analytics'])->with('success','Settings updated successfully');
         }
+
         if($request->has('stripe_payment_method') || $request->has('stripe_key') || $request->has('stripe_secret_key') || $request->has('paypal_payment_method')
         ||$request->has('paypal_client_id') || $request->has('paypal_secret_id')){
             return back()->withInput(['tab'=>'payments'])->with('success','Settings updated successfully');
         }
-        return $this->responseRedirectBack('Settings updated successfully.', 'success');
+
+        if($request->has('site_name') || $request->has('site_title') || $request->has('default_email_address') || $request->has('currency_code') ||
+        $request->has('currency_symbol')){
+            return $this->responseRedirectBack('Settings updated successfully.', 'success');
+        }
+
+        if((config('settings.site_logo') != null) || config('settings.site_favicon') != null){
+            return back()->withInput(['tab'=>'site-logo'])->with('success','Settings updated successfully');
+        }
     }
 }

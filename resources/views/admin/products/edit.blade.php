@@ -10,10 +10,10 @@
 <div class="row user">
     <div class="col-md-3">
         <div class="tile p-0">
-            <ul class="nav flex-column nav-tabs user-tabs">
-                <li class="nav-item"><a class="nav-link active" href="#general" data-toggle="tab">General</a></li>
-                <li class="nav-item"><a class="nav-link" href="#images" data-toggle="tab">Images</a></li>
-                <li class="nav-item"><a class="nav-link" href="#attributes" data-toggle="tab">Attributes</a></li>
+            <ul class="nav flex-column nav-tabs user-tabs" id="myTab">
+                <li class="nav-item"><a class="nav-link active" href="#general" data-toggle="tab" role="tab">General</a></li>
+                <li class="nav-item"><a class="nav-link" href="#images" data-toggle="tab" role="tab">Images</a></li>
+                <li class="nav-item"><a class="nav-link" href="#attributes" data-toggle="tab" role="tab">Attributes</a></li>
             </ul>
         </div>
     </div>
@@ -133,7 +133,7 @@
                     </form>
                 </div>
             </div>
-            <div class="tab-pane" id="images">
+            <div class="tab-pane{{old('tab') == 'images' ? ' active' : null}}" id="images" role="tabpanel">
                 <div class="tile">
                     <h3 class="tile-title">Upload Image</h3>
                     <hr>
@@ -180,7 +180,7 @@
                 </div>
             </div>
 
-            <div class="tab-pane" id="attributes">
+            <div class="tab-pane{{old('tab') == 'attributes' ? ' active' : null}}" id="attributes" role="tabpanel">
                 <div class="tile">
                     <h3 class="tile-title">Attributes</h3>
                     <hr>
@@ -283,6 +283,7 @@
 @push('scripts')
 <script type="text/javascript">
     $(document).ready(function() {
+        $('#myTab a[href="#{{ old('tab') }}"]').tab('show');
         $('.select-attr').on('change', function() {
             $('.attributeSelectedContainer').removeClass('d-none');
             $('#attribute_value').find('option').remove();
