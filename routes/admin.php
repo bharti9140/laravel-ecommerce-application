@@ -31,8 +31,10 @@ Route::group(['prefix'  =>  'admin'], function () {
 /*        Route::get('/', function () {
             return view('admin.dashboard.index');
         })->name('admin.dashboard');*/
-        Route::get('/', [SettingController::class, 'index'])->name('admin.settings');
-        Route::post('/settings', [SettingController::class, 'update'])->name('admin.settings.update');
+        Route::get('/', [OrderController::class, 'index'])->name('admin.orders.index');
+        Route::get('/{order}/show', [OrderController::class, 'show'])->name('admin.orders.show');
+        // Route::get('/', [SettingController::class, 'index'])->name('admin.settings');
+        // Route::post('/settings', [SettingController::class, 'update'])->name('admin.settings.update');
 
     Route::group(['prefix'  =>   'categories'], function () {
 
@@ -83,9 +85,11 @@ Route::group(['prefix'  =>  'admin'], function () {
     Route::post('attributes/add', [ProductAttributeController::class, 'addAttribute'])->name('admin.product.attribute');
     Route::get('/{id}/delete', [ProductAttributeController::class, 'deleteAttribute'])->name('admin.product.attribute.delete');
 
-    Route::group(['prefix' => 'orders'], function () {
-        Route::get('/', [OrderController::class, 'index'])->name('admin.orders.index');
-        Route::get('/{order}/show', [OrderController::class, 'show'])->name('admin.orders.show');
+    Route::group(['prefix' => 'settings'], function () {
+        // Route::get('/', [OrderController::class, 'index'])->name('admin.orders.index');
+        // Route::get('/{order}/show', [OrderController::class, 'show'])->name('admin.orders.show');
+        Route::get('/', [SettingController::class, 'index'])->name('admin.settings');
+        Route::post('/settings', [SettingController::class, 'update'])->name('admin.settings.update');
      });
     });
 });
