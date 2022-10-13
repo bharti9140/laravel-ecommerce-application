@@ -1,4 +1,3 @@
-
 @extends('admin.app')
 @section('title') {{ $pageTitle }} @endsection
 @section('content')
@@ -29,7 +28,8 @@
                         <tr>
                             <td>{{ $order->order_number }}</td>
                             <td>{{ $order->user->fullName }}</td>
-                            <td class="text-center">{{ config('settings.currency_symbol') }}{{ $order->grand_total }}</td>
+                            <td class="text-center">{{ config('settings.currency_symbol') }}{{ round($order->grand_total, 2) }}</td>
+
                             <td class="text-center">{{ $order->item_count }}</td>
                             <td class="text-center">
                                 @if ($order->payment_status == 1)
@@ -43,7 +43,7 @@
                             </td>
                             <td class="text-center">
                                 <div class="btn-group" role="group" aria-label="Second group">
-                                <link rel="shortcut icon" href="{{ asset('favicon.ico') }}">  
+                                    <link rel="shortcut icon" href="{{ asset('favicon.ico') }}">
                                     <a href="{{ route('admin.orders.show', $order->order_number) }}" class="btn btn-sm btn-primary"><i class="fa fa-eye"></i></a>
                                 </div>
                             </td>
@@ -60,6 +60,20 @@
 <script type="text/javascript" src="{{ asset('backend/js/plugins/jquery.dataTables.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('backend/js/plugins/dataTables.bootstrap.min.js') }}"></script>
 <script type="text/javascript">
-    $('#sampleTable').DataTable();
+    $(document).ready(function() {
+        $('#sampleTable').DataTable({
+            "order": [0, 'desc'],
+            'ordering': true,
+            "columnDefs": [{
+                    targets: [0, 1],
+                    searchable: true
+                },
+                {
+                    targets: '_all',
+                    searchable: false
+                }
+            ]
+        });
+    });
 </script>
 @endpush

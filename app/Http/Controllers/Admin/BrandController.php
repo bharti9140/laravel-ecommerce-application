@@ -110,7 +110,7 @@ class BrandController extends BaseController
         $products = $brand->products;
         foreach ($products as $product) {
             if ($product) {
-                return $this->responseRedirectBack('Brand not deleted.', 'error', true, true);
+                return $this->responseRedirectBack('This brand is assgined to the product, delete the product before deleting the brand.', 'error', true, true);
             }
         }
         if ($brand->logo != null) {

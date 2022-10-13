@@ -56,7 +56,7 @@
                                     </div>
                                 </td>
                                 <td class="text-right">
-                                    <a href="{{ route('checkout.cart.remove', $item['id']) }}" class="btn btn-outline-danger"><i class="fa fa-times"></i> </a>
+                                    <a href="{{ route('checkout.cart.remove', $item['id']) }}" class="btn btn-outline-danger" onclick="return confirm('Are you sure want to Remove the Cart detail?')"><i class="fa fa-times"></i> </a>
                                 </td>
                             </tr>
                             @endforeach
@@ -66,7 +66,7 @@
                 @endif
             </main>
             <aside class="col-sm-3">
-                <a href="{{ route('checkout.cart.clear') }}" class="btn btn-danger btn-block mb-4">Clear Cart</a>
+                <a href="{{ route('checkout.cart.clear') }}" class="btn btn-danger btn-block mb-4" onclick="return confirm('Are you sure clear the Cart details?')">Clear Cart</a>
                 <p class="alert alert-success">Add USD 5.00 of eligible items to your order to qualify for FREE Shipping. </p>
                 <dl class="dlist-align h4">
                     <dt>Total:</dt>

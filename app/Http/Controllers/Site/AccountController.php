@@ -10,7 +10,7 @@ class AccountController extends Controller
     public function getOrders()
     {
         $orders = auth()->user()->orders;
-
-        return view('site.pages.account.orders', compact('orders'));
+        $orderLists = $orders->sortByDesc("id");
+        return view('site.pages.account.orders', compact('orderLists'));
     }
 }

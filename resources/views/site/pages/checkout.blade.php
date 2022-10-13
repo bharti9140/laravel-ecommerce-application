@@ -1,6 +1,7 @@
 @extends('site.app')
 @section('title', 'Checkout')
 @section('content')
+@include('site.partials.flash')
 <section class="section-pagetop bg-dark">
     <div class="container clearfix">
         <h2 class="title-page">Checkout</h2>
@@ -26,36 +27,62 @@
                         <article class="card-body">
                             <div class="form-row">
                                 <div class="col form-group">
-                                    <label>First name</label>
-                                    <input type="text" class="form-control" name="first_name" value="{{ auth()->user()->first_name }}" required>
+                                    <label for="first_name">First name</label>
+                                    <input type="text" class="form-control @error('first_name') is-invalid @enderror" name="first_name"
+                                     value="{{ auth()->user()->first_name }}">
+                                     <div class="invalid-feedback active">
+                                    <i class="fa fa-exclamation-circle fa-fw"></i> @error('first_name') <span>{{ $message }}</span> @enderror
+                                </div>
                                 </div>
                                 <div class="col form-group">
-                                    <label>Last name</label>
-                                    <input type="text" class="form-control" name="last_name" value="{{ auth()->user()->last_name }}" required>
+                                    <label for="last_name">Last name</label>
+                                    <input type="text" class="form-control @error('last_name') is-invalid @enderror" name="last_name"
+                                     value="{{ auth()->user()->last_name }}">
+                                     <div class="invalid-feedback active">
+                                    <i class="fa fa-exclamation-circle fa-fw"></i> @error('last_name') <span>{{ $message }}</span> @enderror
+                                </div>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label>Address</label>
-                                <input type="text" class="form-control" name="address" value="{{ auth()->user()->address }}" required>
+                                <label for="address">Address</label>
+                                <input type="text" class="form-control @error('address') is-invalid @enderror" name="address" 
+                                value="{{ auth()->user()->address }}">
+                                <div class="invalid-feedback active">
+                                    <i class="fa fa-exclamation-circle fa-fw"></i> @error('address') <span>{{ $message }}</span> @enderror
+                                </div>
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-md-6">
-                                    <label>City</label>
-                                    <input type="text" class="form-control" name="city" value="{{ auth()->user()->city }}" required>
+                                    <label for = "city">City</label>
+                                    <input type="text" class="form-control @error('city') is-invalid @enderror" name="city" 
+                                    value="{{ auth()->user()->city }}">
+                                    <div class="invalid-feedback active">
+                                    <i class="fa fa-exclamation-circle fa-fw"></i> @error('city') <span>{{ $message }}</span> @enderror
+                                </div>
                                 </div>
                                 <div class="form-group col-md-6">
-                                    <label>Country</label>
-                                    <input type="text" class="form-control" name="country" value="{{ auth()->user()->country }}" required>
+                                    <label for="country">Country</label>
+                                    <input type="text" class="form-control @error('country') is-invalid @enderror" name="country"
+                                     value="{{ auth()->user()->country }}">
+                                     <div class="invalid-feedback active">
+                                    <i class="fa fa-exclamation-circle fa-fw"></i> @error('country') <span>{{ $message }}</span> @enderror
+                                </div>
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="form-group  col-md-6">
-                                    <label>Post Code</label>
-                                    <input type="text" class="form-control" name="post_code" required>
+                                    <label for="post_code">Post Code</label>
+                                    <input type="text" class="form-control @error('post_code') is-invalid @enderror" name="post_code">
+                                    <div class="invalid-feedback active">
+                                    <i class="fa fa-exclamation-circle fa-fw"></i> @error('post_code') <span>{{ $message }}</span> @enderror
+                                </div>
                                 </div>
                                 <div class="form-group  col-md-6">
-                                    <label>Phone Number</label>
-                                    <input type="text" class="form-control" name="phone_number" required>
+                                    <label for="phone_number">Phone Number</label>
+                                    <input type="text" class="form-control @error('phone_number') is-invalid @enderror" name="phone_number">
+                                    <div class="invalid-feedback active">
+                                    <i class="fa fa-exclamation-circle fa-fw"></i> @error('phone_number') <span>{{ $message }}</span> @enderror
+                                </div>
                                 </div>
                             </div>
                             <div class="form-group">

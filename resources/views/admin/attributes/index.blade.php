@@ -47,6 +47,11 @@
 <script type="text/javascript" src="{{ asset('backend/js/plugins/jquery.dataTables.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('backend/js/plugins/dataTables.bootstrap.min.js') }}"></script>
 <script type="text/javascript">
-    $('#sampleTable').DataTable();
+$(document).ready(function() {
+    $('#sampleTable').DataTable( {
+        "order": [0, 'desc'],
+        'ordering': true
+    } );
+} );
 </script>
 @endpush

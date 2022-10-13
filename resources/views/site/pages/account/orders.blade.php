@@ -24,7 +24,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @forelse ($orders as $order)
+                            @forelse ($orderLists as $order)
                                 <tr>
                                     <th scope="row">{{ $order->order_number }}</th>
                                     <td>{{ $order->first_name }}</td>

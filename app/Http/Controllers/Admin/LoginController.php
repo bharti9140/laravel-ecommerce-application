@@ -51,7 +51,7 @@ class LoginController extends Controller
             'email' => $request->email,
             'password' => $request->password
         ], $request->get('remember'))) {
-            return redirect()->intended(route('admin.settings'));
+            return redirect()->intended(route('admin.orders.index'));
         }else{
             return back()->withErrors([
                 'email' => 'Invalid Email.',

@@ -40,10 +40,10 @@
                         </p>
 
                         <div class="btn-group white">
-                            <a class="btn btn-facebook" title="Facebook" target="_blank" href="https://www.facebook.com/"><i class="fab fa-facebook-f  fa-fw"></i></a>
-                            <a class="btn btn-instagram" title="Instagram" target="_blank" href="https://www.instagram.com/"><i class="fab fa-instagram  fa-fw"></i></a>
-                            <a class="btn btn-youtube" title="Youtube" target="_blank" href="https://www.youtube.com/"><i class="fab fa-youtube  fa-fw"></i></a>
-                            <a class="btn btn-twitter" title="Twitter" target="_blank" href="https://twitter.com/i/flow/login"><i class="fab fa-twitter  fa-fw"></i></a>
+                            <a class="btn btn-facebook" title="Facebook" target="_blank" href="{{ config('settings.social_facebook') }}"><i class="fab fa-facebook-f  fa-fw"></i></a>
+                            <a class="btn btn-instagram" title="Instagram" target="_blank" href="{{ config('settings.social_instagram') }}"><i class="fab fa-instagram  fa-fw"></i></a>
+                            <!-- <a class="btn btn-youtube" title="Youtube" target="_blank" href="https://www.youtube.com/"><i class="fab fa-youtube  fa-fw"></i></a> -->
+                            <a class="btn btn-twitter" title="Twitter" target="_blank" href="{{ config('settings.social_twitter') }}"><i class="fab fa-twitter  fa-fw"></i></a>
                         </div>
                     </article>
                 </aside>
